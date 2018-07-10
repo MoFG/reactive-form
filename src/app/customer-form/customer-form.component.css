@@ -1,0 +1,25 @@
+@import url('https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css');
+
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .example-full-width {
+    width: 100%;
+  }
+  .mat-radio-button ~ .mat-radio-button {
+    padding-right: 16px;
+  }
+  .container {
+    width: 500px;
+    background: #fbf9f9e6;
+    margin-top: 25%;
+    border-radius: 5px;
+    box-shadow: 2px 3px 10px 2px #ccc;
+}
+mat-radio-button#mat-radio-2 {
+  margin-right: 10px;
+  color: #000;
+}
