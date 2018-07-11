@@ -15,11 +15,14 @@
   .container {
     width: 500px;
     background: #fbf9f9e6;
-    margin-top: 25%;
+    margin-top: 20px;
     border-radius: 5px;
     box-shadow: 2px 3px 10px 2px #ccc;
 }
 mat-radio-button#mat-radio-2 {
   margin-right: 10px;
   color: #000;
+}
+em {
+  color: #E05C65;
 }
