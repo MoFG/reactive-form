@@ -17,6 +17,8 @@ export class CustomerFormComponent implements OnInit {
 
   pattern = /^[^*|":<>[\]{}.,?/`~¥£€\\()';@&$!#%^*_+=0-9-]+$/;
 
+  // pattern2 = /^[^*|:<>[\]{}.,?/`~¥£€\\';@&$!#%^*+=()”]+$/;
+
   customerForm: FormGroup;
   firstName: FormControl;
   lastName: FormControl;
@@ -60,17 +62,19 @@ export class CustomerFormComponent implements OnInit {
 
   enterDOB(event: any) {
     event.preventDefault();
-    event.stopPropagation();
   }
 
   selectDOB(event: any) {
     this.selectedYear = event.value.getFullYear();
     this.result = this.maxDate.getFullYear() - this.selectedYear;
+
     if (this.result < 18) {
       return this._flag = false;
     } else {
       return this._flag = true;
     }
+
+
   }
 
 }

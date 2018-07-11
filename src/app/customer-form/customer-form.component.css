@@ -13,16 +13,13 @@
     padding-right: 16px;
   }
   .container {
-    width: 500px;
-    background: #fbf9f9e6;
+    width: 100%;
     margin-top: 20px;
-    border-radius: 5px;
-    box-shadow: 2px 3px 10px 2px #ccc;
 }
 mat-radio-button#mat-radio-2 {
   margin-right: 10px;
   color: #000;
 }
-em {
+em, .error {
   color: #E05C65;
 }

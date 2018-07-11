@@ -1,50 +1,74 @@
 <div class="container">
+  <div class="row customer">
 
-  <form class="example-form" [formGroup]="customerForm">
+    <div class="col-md-6 customer-col">
 
-    <div class="first" [ngClass]="{'error': firstName.invalid && firstName.dirty}">
-      <mat-form-field class="example-full-width">
-        <input id="firstName" matInput placeholder="First Name" maxlength="40" value="" formControlName="firstName" required>
-      </mat-form-field>
-      <em *ngIf="firstName.invalid && firstName.dirty">First name incorrect</em>
+      <div *ngIf="customerForm.controls['firstName'].invalid && (customerForm.controls['firstName'].dirty || customerForm.controls['firstName'].touched)"
+        class="error-container">
+        <div class="error" *ngIf="customerForm.controls['firstName'].errors.pattern">First name contains invalid characters</div>
+        <div class="error" *ngIf="customerForm.controls['firstName'].errors.required">First name is required</div>
+      </div>
+
+      <div *ngIf="customerForm.controls['middleName'].invalid && (customerForm.controls['middleName'].dirty || customerForm.controls['middleName'].touched)"
+        class="error-container">
+        <div class="error" *ngIf="customerForm.controls['middleName'].errors.pattern">Middle name contains invalid characters</div>
+        <div class="error" *ngIf="customerForm.controls['middleName'].errors.required">Middle name is required</div>
+      </div>
+
+      <form class="example-form" [formGroup]="customerForm">
+
+        <div class="first" [ngClass]="{'error': firstName.invalid && firstName.dirty}">
+          <mat-form-field class="example-full-width">
+            <input id="firstName" matInput placeholder="First Name" maxlength="40" value="" formControlName="firstName" required>
+          </mat-form-field>
+          <!-- <em *ngIf="firstName.invalid && firstName.dirty">First name is required</em> -->
+        </div>
+
+        <div class="middle" [ngClass]="{'error': middleName.invalid && middleName.dirty}">
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Middle Name" maxlength="40" value="" formControlName="middleName" required>
+          </mat-form-field>
+          <!-- <em *ngIf="middleName.invalid && middleName.dirty">Middle name incorrect</em> -->
+        </div>
+
+        <div class="last" [ngClass]="{'error': lastName.invalid && lastName.dirty}">
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Last Name" maxlength="40" value="" formControlName="lastName" required>
+          </mat-form-field>
+          <em *ngIf="lastName.invalid && lastName.dirty">Last name incorrect</em>
+        </div>
+
+        <mat-radio-group formControlName="gender" required>
+          <mat-radio-button value="male">Male</mat-radio-button>
+          <mat-radio-button value="female">Female</mat-radio-button>
+        </mat-radio-group>
+
+        <div class="occu" [ngClass]="{'error': occupation.invalid && occupation.dirty}">
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Occupation" maxlength="50" value="" formControlName="occupation" required>
+          </mat-form-field>
+          <em *ngIf="occupation.invalid && occupation.dirty">Occupation is required</em>
+        </div>
+
+        <div class="dob" [ngClass]="{'error': dob.invalid && dob.dirty}">
+          <mat-form-field>
+            <input matInput readonly [matDatepicker]="picker" [min]="minDate" [max]="maxDate" (dateChange)="selectDOB($event)" (change)="enterDOB($event)"
+              formControlName="dob" placeholder="Date of birth" required>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+          <em *ngIf="!_flag">You must be over 18</em>
+        </div>
+
+
+      </form>
     </div>
 
-    <div class="middle" [ngClass]="{'error': middleName.invalid && middleName.dirty}">
-      <mat-form-field class="example-full-width">
-        <input matInput placeholder="Middle Name" maxlength="40" value="" formControlName="middleName" required>
-      </mat-form-field>
-      <em *ngIf="middleName.invalid && middleName.dirty">Middle name incorrect</em>
+    <div class="col-md-6">
+
     </div>
 
-    <div class="last" [ngClass]="{'error': lastName.invalid && lastName.dirty}">
-      <mat-form-field class="example-full-width">
-        <input matInput placeholder="Last Name" maxlength="40" value="" formControlName="lastName" required>
-      </mat-form-field>
-      <em *ngIf="lastName.invalid && lastName.dirty">Last name incorrect</em>
-    </div>
+  </div>
 
-    <mat-radio-group formControlName="gender" required>
-      <mat-radio-button value="male">Male</mat-radio-button>
-      <mat-radio-button value="female">Female</mat-radio-button>
-    </mat-radio-group>
-
-    <div class="occu" [ngClass]="{'error': occupation.invalid && occupation.dirty}">
-      <mat-form-field class="example-full-width">
-        <input matInput placeholder="Occupation" maxlength="50" value="" formControlName="occupation" required>
-      </mat-form-field>
-      <em *ngIf="occupation.invalid && occupation.dirty">Occupation is required</em>
-    </div>
-
-    <div class="dob" [ngClass]="{'error': dob.invalid && dob.dirty}">
-      <mat-form-field>
-        <input matInput readonly [matDatepicker]="picker" [min]="minDate" [max]="maxDate" (dateChange)="selectDOB($event)" (change)="enterDOB($event)" formControlName="dob" placeholder="Date of birth" required>
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
-      <em *ngIf="!_flag">You must be over 18</em>
-    </div>
-
-
-  </form>
 
 </div>
