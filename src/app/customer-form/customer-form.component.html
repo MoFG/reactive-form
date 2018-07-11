@@ -6,21 +6,21 @@
       <mat-form-field class="example-full-width">
         <input id="firstName" matInput placeholder="First Name" maxlength="40" value="" formControlName="firstName" required>
       </mat-form-field>
-      <em *ngIf="firstName.invalid && firstName.dirty">First name is required</em>
+      <em *ngIf="firstName.invalid && firstName.dirty">First name incorrect</em>
     </div>
 
     <div class="middle" [ngClass]="{'error': middleName.invalid && middleName.dirty}">
       <mat-form-field class="example-full-width">
         <input matInput placeholder="Middle Name" maxlength="40" value="" formControlName="middleName" required>
       </mat-form-field>
-      <em *ngIf="middleName.invalid && middleName.dirty">Middle name is required</em>
+      <em *ngIf="middleName.invalid && middleName.dirty">Middle name incorrect</em>
     </div>
 
     <div class="last" [ngClass]="{'error': lastName.invalid && lastName.dirty}">
       <mat-form-field class="example-full-width">
         <input matInput placeholder="Last Name" maxlength="40" value="" formControlName="lastName" required>
       </mat-form-field>
-      <em *ngIf="lastName.invalid && lastName.dirty">Last name is required</em>
+      <em *ngIf="lastName.invalid && lastName.dirty">Last name incorrect</em>
     </div>
 
     <mat-radio-group formControlName="gender" required>
@@ -35,13 +35,13 @@
       <em *ngIf="occupation.invalid && occupation.dirty">Occupation is required</em>
     </div>
 
-    <div class="dob">
+    <div class="dob" [ngClass]="{'error': dob.invalid && dob.dirty}">
       <mat-form-field>
-        <input matInput [matDatepicker]="picker" formControlName="dob" placeholder="Date of birth" required>
+        <input matInput readonly [matDatepicker]="picker" [min]="minDate" [max]="maxDate" (dateChange)="selectDOB($event)" (change)="enterDOB($event)" formControlName="dob" placeholder="Date of birth" required>
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
-        <em *ngIf="dob.invalid && dob.dirty">You must be over 18</em>
       </mat-form-field>
+      <em *ngIf="!_flag">You must be over 18</em>
     </div>
 
 
