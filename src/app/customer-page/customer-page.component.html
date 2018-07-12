@@ -1,0 +1,18 @@
+<div class="customer-info" *ngIf="customerArray">
+  <div *ngFor="let customer of customerArray">
+    <p>Full name:
+      <span>{{customer.firstName}} {{customer.lastName}} {{customer.middleName}}</span>
+    </p>
+    <p>Gender:
+      <span>{{customer.gender}}</span>
+    </p>
+    <p>Occupation:
+      <span>{{customer.occupation}}</span>
+    </p>
+    <p>Date of birth:
+      <span>{{customer.dob | date: 'mediumDate'}}</span>
+    </p>
+  </div>
+</div>
+
+<customer-form (sendData)="receiveData($event)"></customer-form>

@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Pipe } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -8,6 +8,7 @@ import {
   FormArray,
   AbstractControl
 } from '@angular/forms';
+import { Customer } from '../../model/customer';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -17,9 +18,8 @@ import {
 })
 export class CustomerFormComponent implements OnInit {
 
-  @Output() sendData = new EventEmitter();
-
-
+  @Output() sendData = new EventEmitter<Customer[]>();
+  count = 0;
   pattern = /^[^*|":<>[\]{}.,?/`~¥£€\\()';@&$!#%^*_+=0-9-]+$/;
 
   // pattern2 = /^[^*|:<>[\]{}.,?/`~¥£€\\';@&$!#%^*+=()”]+$/;
@@ -44,6 +44,8 @@ export class CustomerFormComponent implements OnInit {
   selectedYear: number;
   result: number;
   _flag = true;
+  customer: Customer[] = [];
+
 
   constructor(private fb: FormBuilder) {
     this.firstName = new FormControl('', [Validators.required, Validators.pattern(this.pattern)]);
@@ -52,7 +54,6 @@ export class CustomerFormComponent implements OnInit {
     this.gender = new FormControl('', Validators.required);
     this.occupation = new FormControl('', [Validators.required, Validators.pattern(this.pattern)]);
     this.dob = new FormControl('', Validators.required);
-
   }
 
   ngOnInit() {
@@ -78,9 +79,23 @@ export class CustomerFormComponent implements OnInit {
     });
   }
 
+
   addNew(): void {
-    this.items = this.customerForm.get('items') as FormArray;
-    this.items.push(this.createForm());
+    this.count = this.count + 1;
+    const object = {
+      firstName: this.customerForm.value.firstName,
+      lastName: this.customerForm.value.lastName,
+      middleName: this.customerForm.value.middleName,
+      gender: this.customerForm.value.gender,
+      occupation: this.customerForm.value.occupation,
+      dob: this.customerForm.value.dob
+    };
+    this.customer.push(object);
+    if (this.count < 3) {
+      this.items = this.customerForm.get('items') as FormArray;
+      this.items.push(this.createForm());
+    }
+    this.sendData.emit(this.customer);
   }
 
   enterDOB(event: any) {
@@ -91,11 +106,10 @@ export class CustomerFormComponent implements OnInit {
     this.selectedYear = event.value.getFullYear();
     this.result = this.maxDate.getFullYear() - this.selectedYear;
 
-    if (this.result < 18) {
-      return this._flag = false;
-    } else {
+    if (this.result >= 18 && this.result <= 65) {
       return this._flag = true;
+    } else {
+      return this._flag = false;
     }
   }
-
 }

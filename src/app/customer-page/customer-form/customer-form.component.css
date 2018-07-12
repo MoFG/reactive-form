@@ -1,7 +1,7 @@
 @import url('https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css');
 .example-form {
   min-width: 150px;
-  max-width: 500px;
+  max-width: 100%;
   width: 100%;
 }
 
@@ -29,6 +29,7 @@ mat-radio-button#mat-radio-2 {
   padding: 10px;
   border-radius: 8px;
   margin: 10px 5px;
+  width: 33%;
 }
 
 .btnNew {
@@ -55,13 +56,14 @@ button.btn.btn-danger.addNew:focus {
   outline: none;
 }
 .btnNew:hover {
-  background: #fff;
-  border: 1px solid red;
+  background: #000;
+  
 }
 
-.btnNew:hover button.btn.btn-danger.addNew[_ngcontent-c1] {
-  color: red;
-}
 em {
   color: red;
+}
+form.example-form{
+  display: flex;
+  justify-content: flex-start;
 }

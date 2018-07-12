@@ -1,8 +1,7 @@
 <div class="container">
   <div class="row customer">
 
-    <div class="col-md-6 customer-col">
-
+    <div class="customer-col">
 
       <div *ngIf="customerForm.controls['firstName'].invalid && (customerForm.controls['firstName'].dirty || customerForm.controls['firstName'].touched)"
         class="error-container">
@@ -64,7 +63,7 @@
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
               </mat-form-field>
-              <em *ngIf="!_flag">You must be over 18</em>
+              <em *ngIf="!_flag">You must be from 18 to 65</em>
             </div>
 
           </div>
