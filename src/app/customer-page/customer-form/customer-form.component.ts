@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
   FormControl,
   Validators,
-  ValidatorFn
+  ValidatorFn,
+  FormArray,
+  AbstractControl
 } from '@angular/forms';
 
 @Component({
@@ -15,9 +17,14 @@ import {
 })
 export class CustomerFormComponent implements OnInit {
 
+  @Output() sendData = new EventEmitter();
+
+
   pattern = /^[^*|":<>[\]{}.,?/`~¥£€\\()';@&$!#%^*_+=0-9-]+$/;
 
   // pattern2 = /^[^*|:<>[\]{}.,?/`~¥£€\\';@&$!#%^*+=()”]+$/;
+
+  items: any[] = [];
 
   customerForm: FormGroup;
   firstName: FormControl;
@@ -36,7 +43,7 @@ export class CustomerFormComponent implements OnInit {
 
   selectedYear: number;
   result: number;
-  _flag: boolean = true;
+  _flag = true;
 
   constructor(private fb: FormBuilder) {
     this.firstName = new FormControl('', [Validators.required, Validators.pattern(this.pattern)]);
@@ -46,7 +53,22 @@ export class CustomerFormComponent implements OnInit {
     this.occupation = new FormControl('', [Validators.required, Validators.pattern(this.pattern)]);
     this.dob = new FormControl('', Validators.required);
 
+  }
+
+  ngOnInit() {
     this.customerForm = this.fb.group({
+      firstName: this.firstName,
+      middleName: this.middleName,
+      lastName: this.lastName,
+      gender: this.gender,
+      occupation: this.occupation,
+      dob: this.dob,
+      items: this.fb.array([this.createForm()])
+    });
+  }
+
+  createForm(): FormGroup {
+    return this.fb.group({
       firstName: this.firstName,
       middleName: this.middleName,
       lastName: this.lastName,
@@ -54,10 +76,11 @@ export class CustomerFormComponent implements OnInit {
       occupation: this.occupation,
       dob: this.dob
     });
-
   }
 
-  ngOnInit() {
+  addNew(): void {
+    this.items = this.customerForm.get('items') as FormArray;
+    this.items.push(this.createForm());
   }
 
   enterDOB(event: any) {
@@ -73,8 +96,6 @@ export class CustomerFormComponent implements OnInit {
     } else {
       return this._flag = true;
     }
-
-
   }
 
 }
