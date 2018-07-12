@@ -20,6 +20,8 @@ export class CustomerPageComponent implements OnInit {
 
   receiveData(event) {
     this.customerArray = event;
+    console.log(this.customerArray);
+    
   }
 
 

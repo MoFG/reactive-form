@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Pipe } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Pipe, Input } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -19,6 +19,7 @@ import { Customer } from '../../model/customer';
 export class CustomerFormComponent implements OnInit {
 
   @Output() sendData = new EventEmitter<Customer[]>();
+
   count = 0;
   pattern = /^[^*|":<>[\]{}.,?/`~¥£€\\()';@&$!#%^*_+=0-9-]+$/;
 
