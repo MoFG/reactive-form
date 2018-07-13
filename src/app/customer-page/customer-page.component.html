@@ -1,4 +1,4 @@
-<div class="customer-info" *ngIf="customerArray">
+<!-- <div class="customer-info" *ngIf="customerArray">
   <div *ngFor="let customer of customerArray">
     <p>Full name:
       <span>{{customer.firstName}} {{customer.lastName}} {{customer.middleName}}</span>
@@ -13,6 +13,66 @@
       <span>{{customer.dob | date: 'mediumDate'}}</span>
     </p>
   </div>
-</div>
+</div> -->
 
-<customer-form (sendData)="receiveData($event)"></customer-form>
+
+<div class="container">
+  <div class="customer-col">
+    <!-- CUSTOMER VALIDATION -->
+    <!-- <div *ngIf="customerForm.controls['firstName'].invalid && (customerForm.controls['firstName'].dirty || customerForm.controls['firstName'].touched)"
+      class="error-container">
+      <mat-error *ngIf="customerForm.controls['firstName'].errors.pattern">First name contains invalid characters</mat-error>
+      <mat-error *ngIf="customerForm.controls['firstName'].required">First name is required</mat-error>
+    </div> -->
+
+    <!-- <div *ngIf="customerForm.controls['middleName'].invalid && (customerForm.controls['middleName'].dirty || customerForm.controls['middleName'].touched)"
+      class="error-container">
+      <mat-error *ngIf="customerForm.controls['middleName'].errors.pattern">Middle name contains invalid characters</mat-error>
+      <mat-error *ngIf="customerForm.controls['middleName'].errors.required">Middle name is required</mat-error>
+    </div>
+
+    <div *ngIf="customerForm.controls['lastName'].invalid && (customerForm.controls['lastName'].dirty || customerForm.controls['lastName'].touched)"
+      class="error-container">
+      <mat-error *ngIf="customerForm.controls['lastName'].errors.pattern">Last name contains invalid characters</mat-error>
+      <mat-error *ngIf="customerForm.controls['lastName'].errors.required">Last name is required</mat-error>
+    </div> -->
+    <!-- CUSTOMER VALIDATION -->
+
+    <!-- INSURED VALIDATION -->
+    <!-- <div *ngIf="customerForm.controls.insured.controls['firstName'].invalid && (customerForm.controls.insured.controls['firstName'].dirty || customerForm.controls.insured.controls['firstName'].touched)"
+      class="error-container">
+      <mat-error *ngIf="customerForm.controls.insured.controls['firstName'].errors.pattern">First name contains invalid characters</mat-error>
+      <mat-error *ngIf="customerForm.controls.insured.controls['firstName'].errors.required">First name is required</mat-error>
+    </div> -->
+
+    <!-- <div *ngIf="insuredForm.controls['middleName'].invalid && (insuredForm.controls['middleName'].dirty || insuredForm.controls['middleName'].touched)"
+      class="error-container">
+      <mat-error *ngIf="insuredForm.controls['middleName'].errors.pattern">Middle name contains invalid characters</mat-error>
+      <mat-error *ngIf="insuredForm.controls['middleName'].errors.required">Middle name is required</mat-error>
+    </div>
+
+    <div *ngIf="insuredForm.controls['lastName'].invalid && (insuredForm.controls['lastName'].dirty || insuredForm.controls['lastName'].touched)"
+      class="error-container">
+      <mat-error *ngIf="insuredForm.controls['lastName'].errors.pattern">Last name contains invalid characters</mat-error>
+      <mat-error *ngIf="insuredForm.controls['lastName'].errors.required">Last name is required</mat-error>
+    </div> -->
+    <!-- INSURED VALIDATION -->
+
+    <form class="example-form my-form" [formGroup]="customerForm">
+      <div formArrayName="insured">
+        <div class="insured-form" *ngFor="let insure of customerForm.controls.insured.controls; let i = index">
+          <div class="panel-heading">
+            <span class="glyphicon glyphicon-remove pull-right" *ngIf="customerForm.controls.insured.controls.length > 1" (click)="removeForm(i)"></span>
+          </div>
+          <div class="panel-body" [formGroupName]="i">
+            <customer-form [group]="customerForm.controls.insured.controls[i]"></customer-form>
+          </div>
+        </div>
+      </div>
+      <div class="btnNew">
+        <button class="btn btn-danger addNew" (click)="addNew()">+</button>
+      </div>
+    </form>
+
+  </div>
+</div>

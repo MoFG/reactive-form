@@ -1,2 +1,67 @@
 /* You can add global styles to this file, and also import other style files */
+
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+.example-form {
+  min-width: 150px;
+  max-width: 100%;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+.mat-radio-button~.mat-radio-button {
+  padding-right: 16px;
+}
+
+mat-radio-button#mat-radio-2 {
+  margin-right: 10px;
+  color: #000;
+}
+
+.ng-star-inserted .panel-body {
+  padding: 0;
+}
+
+.btnNew {
+  width: 40px;
+  height: 40px;
+  background: red;
+  text-align: center;
+  line-height: 40px;
+  border-radius: 50%;
+  position: fixed;
+  bottom: 5%;
+  right: 5%;
+  transition: 0.4s;
+}
+
+button.btn.btn-danger.addNew {
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  color: #fff;
+  transition: 0.4s;
+}
+
+button.btn.btn-danger.addNew:focus {
+  outline: none;
+}
+
+.btnNew:hover {
+  background: #000;
+}
+
+em {
+  color: red;
+}
+
+.insured-form, .customer-form {
+  overflow: hidden;
+  background: #ccc;
+  margin: 10px 0;
+  box-sizing: border-box;
+  padding: 10px;
+  border-radius: 8px;
+}

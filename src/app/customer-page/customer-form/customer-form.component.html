@@ -2,83 +2,69 @@
   <div class="row customer">
 
     <div class="customer-col">
-
-      <div *ngIf="customerForm.controls['firstName'].invalid && (customerForm.controls['firstName'].dirty || customerForm.controls['firstName'].touched)"
+<!-- 
+      <div *ngIf="insuredForm.controls['firstName'].invalid && (insuredForm.controls['firstName'].dirty || insuredForm.controls['firstName'].touched)"
         class="error-container">
-        <mat-error *ngIf="customerForm.controls['firstName'].errors.pattern">First name contains invalid characters</mat-error>
-        <mat-error *ngIf="customerForm.controls['firstName'].errors.required">First name is required</mat-error>
+        <mat-error *ngIf="insuredForm.controls['firstName'].errors.pattern">First name contains invalid characters</mat-error>
+        <mat-error *ngIf="insuredForm.controls['firstName'].errors.required">First name is required</mat-error>
       </div>
 
-      <div *ngIf="customerForm.controls['middleName'].invalid && (customerForm.controls['middleName'].dirty || customerForm.controls['middleName'].touched)"
+      <div *ngIf="insuredForm.controls['middleName'].invalid && (insuredForm.controls['middleName'].dirty || insuredForm.controls['middleName'].touched)"
         class="error-container">
-        <mat-error *ngIf="customerForm.controls['middleName'].errors.pattern">Middle name contains invalid characters</mat-error>
-        <mat-error *ngIf="customerForm.controls['middleName'].errors.required">Middle name is required</mat-error>
+        <mat-error *ngIf="insuredForm.controls['middleName'].errors.pattern">Middle name contains invalid characters</mat-error>
+        <mat-error *ngIf="insuredForm.controls['middleName'].errors.required">Middle name is required</mat-error>
       </div>
 
-      <div *ngIf="customerForm.controls['lastName'].invalid && (customerForm.controls['lastName'].dirty || customerForm.controls['lastName'].touched)"
+      <div *ngIf="insuredForm.controls['lastName'].invalid && (insuredForm.controls['lastName'].dirty || insuredForm.controls['lastName'].touched)"
         class="error-container">
-        <mat-error *ngIf="customerForm.controls['lastName'].errors.pattern">Last name contains invalid characters</mat-error>
-        <mat-error *ngIf="customerForm.controls['lastName'].errors.required">Last name is required</mat-error>
-      </div>
+        <mat-error *ngIf="insuredForm.controls['lastName'].errors.pattern">Last name contains invalid characters</mat-error>
+        <mat-error *ngIf="insuredForm.controls['lastName'].errors.required">Last name is required</mat-error>
+      </div> -->
 
 
-      <form class="example-form" [formGroup]="customerForm">
-        <div class="my-form" formArrayName="items" *ngFor="let item of customerForm.get('items').controls; let i = index;">
-          <div [formGroupName]="i">
-            <div class="first" [ngClass]="{'error': firstName.invalid && firstName.dirty}">
-              <mat-form-field class="example-full-width">
-                <input id="firstName" matInput placeholder="First Name" maxlength="40" value="" formControlName="firstName" required>
-              </mat-form-field>
-            </div>
+      <form class="example-form" [formGroup]="insuredForm">
+        <div class="first">
+          <mat-form-field class="example-full-width">
+            <input id="firstName" matInput placeholder="First Name" maxlength="40" value="" formControlName="firstName" required>
+          </mat-form-field>
+        </div>
 
-            <div class="middle" [ngClass]="{'error': middleName.invalid && middleName.dirty}">
-              <mat-form-field class="example-full-width">
-                <input matInput placeholder="Middle Name" maxlength="40" value="" formControlName="middleName" required>
-              </mat-form-field>
-            </div>
+        <div class="middle">
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Middle Name" maxlength="40" value="" formControlName="middleName" required>
+          </mat-form-field>
+        </div>
 
-            <div class="last" [ngClass]="{'error': lastName.invalid && lastName.dirty}">
-              <mat-form-field class="example-full-width">
-                <input matInput placeholder="Last Name" maxlength="40" value="" formControlName="lastName" required>
-              </mat-form-field>
-              <em *ngIf="lastName.invalid && lastName.dirty">Last name incorrect</em>
-            </div>
+        <div class="last">
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Last Name" maxlength="40" value="" formControlName="lastName" required>
+          </mat-form-field>
+        </div>
 
-            <mat-radio-group formControlName="gender" required>
-              <mat-radio-button value="male">Male</mat-radio-button>
-              <mat-radio-button value="female">Female</mat-radio-button>
-            </mat-radio-group>
+        <mat-radio-group formControlName="gender" required>
+          <mat-radio-button value="male">Male</mat-radio-button>
+          <mat-radio-button value="female">Female</mat-radio-button>
+        </mat-radio-group>
 
-            <div class="occu" [ngClass]="{'error': occupation.invalid && occupation.dirty}">
-              <mat-form-field class="example-full-width">
-                <input matInput placeholder="Occupation" maxlength="50" value="" formControlName="occupation" required>
-              </mat-form-field>
-              <em *ngIf="occupation.invalid && occupation.dirty">Occupation is required</em>
-            </div>
+        <div class="occu">
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Occupation" maxlength="50" value="" formControlName="occupation" required>
+          </mat-form-field>
+          <em *ngIf="insuredForm.controls['occupation'].invalid && insuredForm.controls['occupation'].dirty">Occupation invalid</em>
+        </div>
 
-            <div class="dob" [ngClass]="{'error': dob.invalid && dob.dirty}">
-              <mat-form-field>
-                <input matInput readonly [matDatepicker]="picker" [min]="minDate" [max]="maxDate" (dateChange)="selectDOB($event)" (change)="enterDOB($event)"
-                  formControlName="dob" placeholder="Date of birth" required>
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
-              </mat-form-field>
-              <em *ngIf="!_flag">You must be from 18 to 65</em>
-            </div>
-
-          </div>
+        <div class="dob">
+          <mat-form-field>
+            <input matInput readonly [matDatepicker]="picker" [min]="minDate" [max]="maxDate" (dateChange)="selectDOB($event)" (change)="enterDOB($event)"
+              formControlName="dob" placeholder="Date of birth" required>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+          <em *ngIf="!_flag">You must be from 18 to 65</em>
         </div>
       </form>
     </div>
 
-    <div class="col-md-6">
-
-    </div>
-
-  </div>
-
-  <div class="btnNew">
-    <button class="btn btn-danger addNew" (click)="addNew()">+</button>
   </div>
 
 </div>
