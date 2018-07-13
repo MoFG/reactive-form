@@ -2,8 +2,8 @@
   <div class="row customer">
 
     <div class="customer-col">
-<!-- 
-      <div *ngIf="insuredForm.controls['firstName'].invalid && (insuredForm.controls['firstName'].dirty || insuredForm.controls['firstName'].touched)"
+
+       <!--<div *ngIf="insuredForm.controls['firstName'].invalid && (insuredForm.controls['firstName'].dirty || insuredForm.controls['firstName'].touched)"
         class="error-container">
         <mat-error *ngIf="insuredForm.controls['firstName'].errors.pattern">First name contains invalid characters</mat-error>
         <mat-error *ngIf="insuredForm.controls['firstName'].errors.required">First name is required</mat-error>
@@ -22,7 +22,7 @@
       </div> -->
 
 
-      <form class="example-form" [formGroup]="insuredForm">
+      <form class="example-form" [formGroup]="group">
         <div class="first">
           <mat-form-field class="example-full-width">
             <input id="firstName" matInput placeholder="First Name" maxlength="40" value="" formControlName="firstName" required>
@@ -50,7 +50,7 @@
           <mat-form-field class="example-full-width">
             <input matInput placeholder="Occupation" maxlength="50" value="" formControlName="occupation" required>
           </mat-form-field>
-          <em *ngIf="insuredForm.controls['occupation'].invalid && insuredForm.controls['occupation'].dirty">Occupation invalid</em>
+          <em *ngIf="group.controls['occupation'].invalid && group.controls['occupation'].dirty">Occupation invalid</em>
         </div>
 
         <div class="dob">

@@ -1,16 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { EventEmitService } from '../event-emit.service';
+import { Component, OnInit, Output, EventEmitter, Input, SimpleChanges, OnChanges } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators, FormArray } from '../../../node_modules/@angular/forms';
 import { Customer } from '../model/customer';
 
 @Component({
-  // tslint:disable-next-line:component-selector
   selector: 'customer-page',
   templateUrl: './customer-page.component.html',
   styleUrls: ['./customer-page.component.css']
 })
-export class CustomerPageComponent implements OnInit {
+export class CustomerPageComponent implements OnInit, OnChanges{
 
+  userData: Customer[] = [];
   public customerForm: FormGroup;
   firstName: FormControl;
   lastName: FormControl;
@@ -18,8 +17,7 @@ export class CustomerPageComponent implements OnInit {
   gender: FormControl;
   occupation: FormControl;
   dob: FormControl;
-
-  // customerArray: Customer[] = [];
+  mode = ['owner', 'insured', 'dependent'];
   pattern = /^[^*|":<>[\]{}.,?/`~¥£€\\()';@&$!#%^*_+=0-9-]+$/;
 
   constructor(private fb: FormBuilder) {
@@ -37,9 +35,9 @@ export class CustomerPageComponent implements OnInit {
     });
   }
 
-  receiveData(event) {
-    // this.customerArray = event;
-    // console.log(this.customerArray);
+  ngOnChanges() {
+    console.log(this.userData);
+    
   }
 
   createForm() {
@@ -53,13 +51,19 @@ export class CustomerPageComponent implements OnInit {
     });
   }
 
-  save(model: Customer) {
-    console.log('Save customer: ' + model);
-  }
-
   addNew() {
     const control = <FormArray>this.customerForm.controls['insured'];
     control.push(this.createForm());
+    let object = {
+      firstName: control.value.firstName,
+      lastName: control.value.lastName,
+      middleName: control.value.middleName,
+      gender: control.value.gender,
+      occupation: control.value.occupation,
+      dob: control.value.dob
+    }
+    object = control.value;
+    this.userData.push(object);
   }
 
   removeForm(i: number) {

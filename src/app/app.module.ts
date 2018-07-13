@@ -10,12 +10,14 @@ import { MatNativeDateModule } from '../../node_modules/@angular/material/core';
 import { FormsModule, ReactiveFormsModule } from '../../node_modules/@angular/forms';
 import { CustomerPageComponent } from './customer-page/customer-page.component';
 import { EventEmitService } from './event-emit.service';
+import { UserInfoComponent } from './customer-page/user-info/user-info.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CustomerFormComponent,
-    CustomerPageComponent
+    CustomerPageComponent,
+    UserInfoComponent
   ],
   imports: [
     BrowserModule,
