@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input} from '@angular/core';
 import { Customer } from '../../model/customer';
 
 @Component({
@@ -6,17 +6,13 @@ import { Customer } from '../../model/customer';
   templateUrl: './user-info.component.html',
   styleUrls: ['./user-info.component.css']
 })
-export class UserInfoComponent implements OnInit, OnChanges {
+export class UserInfoComponent implements OnInit{
 
-  @Input() info: Customer[];
-  constructor() { }
-
-  ngOnInit() {
-    console.log(this.info);
+  @Input() info: Customer;
+  constructor() {
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    console.log(this.info);
+  ngOnInit() {
   }
 
 }

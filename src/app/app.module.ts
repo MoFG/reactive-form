@@ -9,7 +9,6 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '../../node_modules/@angular/material/core';
 import { FormsModule, ReactiveFormsModule } from '../../node_modules/@angular/forms';
 import { CustomerPageComponent } from './customer-page/customer-page.component';
-import { EventEmitService } from './event-emit.service';
 import { UserInfoComponent } from './customer-page/user-info/user-info.component';
 
 @NgModule({
@@ -29,7 +28,7 @@ import { UserInfoComponent } from './customer-page/user-info/user-info.component
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [EventEmitService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

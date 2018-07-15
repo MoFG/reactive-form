@@ -7,9 +7,8 @@ import { Customer } from '../model/customer';
   templateUrl: './customer-page.component.html',
   styleUrls: ['./customer-page.component.css']
 })
-export class CustomerPageComponent implements OnInit, OnChanges{
+export class CustomerPageComponent implements OnInit, OnChanges {
 
-  userData: Customer[] = [];
   public customerForm: FormGroup;
   firstName: FormControl;
   lastName: FormControl;
@@ -19,6 +18,9 @@ export class CustomerPageComponent implements OnInit, OnChanges{
   dob: FormControl;
   mode = ['owner', 'insured', 'dependent'];
   pattern = /^[^*|":<>[\]{}.,?/`~¥£€\\()';@&$!#%^*_+=0-9-]+$/;
+
+  userData: Customer;
+
 
   constructor(private fb: FormBuilder) {
   }
@@ -37,7 +39,6 @@ export class CustomerPageComponent implements OnInit, OnChanges{
 
   ngOnChanges() {
     console.log(this.userData);
-    
   }
 
   createForm() {
@@ -55,15 +56,15 @@ export class CustomerPageComponent implements OnInit, OnChanges{
     const control = <FormArray>this.customerForm.controls['insured'];
     control.push(this.createForm());
     let object = {
-      firstName: control.value.firstName,
-      lastName: control.value.lastName,
-      middleName: control.value.middleName,
-      gender: control.value.gender,
-      occupation: control.value.occupation,
-      dob: control.value.dob
+      firstName: this.customerForm.controls['insured'].value.firstName,
+      lastName: this.customerForm.controls['insured'].value.lastName,
+      middleName: this.customerForm.controls['insured'].value.middleName,
+      gender: this.customerForm.controls['insured'].value.gender,
+      occupation: this.customerForm.controls['insured'].value.occupation,
+      dob: this.customerForm.controls['insured'].value.dob
     }
-    object = control.value;
-    this.userData.push(object);
+    object = this.customerForm.controls['insured'].value;
+    this.userData = object
   }
 
   removeForm(i: number) {

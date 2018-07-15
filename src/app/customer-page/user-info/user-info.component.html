@@ -1,6 +1,8 @@
-<div *ngFor="let info of userData">
-  <p>Full name: {{info.firstName}} {{info.lastName}} {{info.middleName}}</p>
-  <p>Gender: {{info.gender}}</p>
-  <p>Occupation: {{info.occupation}}</p>
-  <p>DOB: {{info.dob}}</p>
+<div *ngFor="let in of info">
+  <div *ngIf="info!=null">
+    <h1>Full name: {{in.firstName}} {{in.lastName}} {{in.middleName}}</h1>
+    <h1>Gender: {{in.gender}}</h1>
+    <h1>Occupation: {{in.occupation}}</h1>
+    <h1>DOB: {{in.dob | date: 'mediumDate'}}</h1>
+  </div>
 </div>
