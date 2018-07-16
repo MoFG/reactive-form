@@ -2,3 +2,15 @@ p span{
     color: #f00;
     font-size: 18px;
 }
+.f-info {
+    font-size: 15px;
+    color: red;
+}
+.user-info {
+    background: #000;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    margin: 20px 0;
+    border-radius: 8px;
+}

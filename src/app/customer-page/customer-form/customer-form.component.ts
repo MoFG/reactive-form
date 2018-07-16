@@ -20,6 +20,8 @@ export class CustomerFormComponent implements OnInit {
   @Input() mode;
   @Input() group;
   @Input() insured;
+  @Output() sendCustomerInfo = new EventEmitter<Customer>();
+
   public insuredForm: FormGroup;
   
   maxDate = new Date();
@@ -32,11 +34,16 @@ export class CustomerFormComponent implements OnInit {
   selectedYear: number;
   result: number;
   _flag = true;
+  myCustomer: Customer;
 
   constructor(private fb: FormBuilder) {}
 
   ngOnInit() {
-    // console.log(this.mode);
+  }
+
+  selectValues(value) {
+    this.myCustomer = value;
+    this.sendCustomerInfo.emit(this.myCustomer);
   }
 
   enterDOB(event: any) {

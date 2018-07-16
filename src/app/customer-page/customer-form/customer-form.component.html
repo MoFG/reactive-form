@@ -3,9 +3,11 @@
 
     <div class="customer-col">
       <form class="example-form" [formGroup]="group">
+        <a class="btn btn-primary choose" (click)="selectValues(group.value)">Select</a>
         <div class="first">
           <mat-form-field class="example-full-width">
-            <input id="firstName" matInput placeholder="First Name" maxlength="40" value="" formControlName="firstName" required>
+            <input id="firstName" matInput placeholder="First Name" maxlength="40" value="" formControlName="firstName"
+              required>
           </mat-form-field>
         </div>
 
@@ -21,10 +23,13 @@
           </mat-form-field>
         </div>
 
-        <mat-radio-group formControlName="gender" required>
-          <mat-radio-button value="male">Male</mat-radio-button>
-          <mat-radio-button value="female">Female</mat-radio-button>
-        </mat-radio-group>
+        <div class="gender">
+          <mat-radio-group formControlName="gender" required>
+            <mat-radio-button value="male">Male</mat-radio-button>
+            <mat-radio-button value="female">Female</mat-radio-button>
+          </mat-radio-group>
+        </div>
+
 
         <div class="occu">
           <mat-form-field class="example-full-width">

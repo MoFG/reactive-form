@@ -2,6 +2,13 @@
   <user-info [info]="userData"></user-info>
 </div>
 
+<div class="user-info" *ngIf="customerInfo!=null">
+  <h1 class="f-info">Full name: {{customerInfo.firstName}} {{customerInfo.lastName}} {{customerInfo.middleName}}</h1>
+  <h1 class="f-info">Gender: {{customerInfo.gender}}</h1>
+  <h1 class="f-info">Occupation: {{customerInfo.occupation}}</h1>
+  <h1 class="f-info">DOB: {{customerInfo.dob | date: 'mediumDate'}}</h1>
+</div>
+
 <div class="container">
   <div class="customer-col">
     <!-- CUSTOMER VALIDATION -->
@@ -45,7 +52,7 @@
             <span class="glyphicon glyphicon-remove pull-right" *ngIf="i > 0" (click)="removeForm(i)"></span>
           </div>
           <div class="panel-body" [formGroupName]="i">
-            <customer-form [mode]="mode[i]" [insured]="customerForm.controls.insured" [group]="customerForm.controls.insured.controls[i]"></customer-form>
+            <customer-form (sendCustomerInfo)="recivedCustomerInfo($event)" [mode]="mode[i]" [insured]="customerForm.controls.insured" [group]="customerForm.controls.insured.controls[i]"></customer-form>
           </div>
         </div>
       </div>
