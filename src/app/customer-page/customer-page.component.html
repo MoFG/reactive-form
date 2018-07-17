@@ -51,8 +51,11 @@
           <div class="panel-heading">
             <span class="glyphicon glyphicon-remove pull-right" *ngIf="i > 0" (click)="removeForm(i)"></span>
           </div>
-          <div class="panel-body" [formGroupName]="i">
+          <!-- <div class="panel-body" [formGroupName]="i">
             <customer-form (sendCustomerInfo)="recivedCustomerInfo($event)" [mode]="mode[i]" [insured]="customerForm.controls.insured" [group]="customerForm.controls.insured.controls[i]"></customer-form>
+          </div> -->
+          <div class="panel-body" [formGroupName]="i">
+            <customer-form [mode]="mode[i]" [insured]="customerForm.controls.insured" [group]="customerForm.controls.insured.controls[i]"></customer-form>
           </div>
         </div>
       </div>

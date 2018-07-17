@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Pipe, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Pipe, Input, AfterViewInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -9,19 +9,18 @@ import {
   AbstractControl
 } from '@angular/forms';
 import { Customer } from '../../model/customer';
+import { EventEmitService } from '../../service/event-emit.service';
 
 @Component({
   selector: 'customer-form',
   templateUrl: './customer-form.component.html',
   styleUrls: ['./customer-form.component.css']
 })
-export class CustomerFormComponent implements OnInit {
+export class CustomerFormComponent implements OnInit{
 
   @Input() mode;
   @Input() group;
   @Input() insured;
-  @Output() sendCustomerInfo = new EventEmitter<Customer>();
-
   public insuredForm: FormGroup;
   
   maxDate = new Date();
@@ -36,14 +35,14 @@ export class CustomerFormComponent implements OnInit {
   _flag = true;
   myCustomer: Customer;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private eventEmitService: EventEmitService) {}
 
   ngOnInit() {
   }
 
   selectValues(value) {
     this.myCustomer = value;
-    this.sendCustomerInfo.emit(this.myCustomer);
+    this.eventEmitService.customerData.emit(this.myCustomer);
   }
 
   enterDOB(event: any) {

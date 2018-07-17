@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators, FormArray } from '../../../node_modules/@angular/forms';
 import { Customer } from '../model/customer';
+import { EventEmitService } from '../service/event-emit.service';
 
 @Component({
   selector: 'customer-page',
@@ -22,7 +23,10 @@ export class CustomerPageComponent implements OnInit {
   mode =      ['owner', 'insured', 'dependent'];
   pattern =   /^[^*|":<>[\]{}.,?/`~¥£€\\()';@&$!#%^*_+=0-9-]+$/;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private eventEmitService: EventEmitService) {
+    this.eventEmitService.customerData.subscribe((data: Customer) => {
+      this.customerInfo = data;
+    })
   }
 
   ngOnInit() {
@@ -51,10 +55,6 @@ export class CustomerPageComponent implements OnInit {
   removeForm(i: number) {
     const control = <FormArray>this.customerForm.controls['insured'];
     control.removeAt(i);
-  }
-
-  recivedCustomerInfo(data) {
-    this.customerInfo = data;
   }
 
 }
