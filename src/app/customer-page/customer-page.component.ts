@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators, FormArray } from '../../../node_modules/@angular/forms';
 import { Customer } from '../model/customer';
 import { EventEmitService } from '../service/event-emit.service';
+import { Subscriber } from '../../../node_modules/rxjs';
 
 @Component({
   selector: 'customer-page',
@@ -22,9 +23,9 @@ export class CustomerPageComponent implements OnInit {
 
   mode =      ['owner', 'insured', 'dependent'];
   pattern =   /^[^*|":<>[\]{}.,?/`~¥£€\\()';@&$!#%^*_+=0-9-]+$/;
-
+  private customerDataSubscriber: Subscriber<string>;
   constructor(private fb: FormBuilder, private eventEmitService: EventEmitService) {
-    this.eventEmitService.customerData.subscribe((data: Customer) => {
+    this.customerDataSubscriber = this.eventEmitService.customerData.subscribe((data: Customer) => {
       this.customerInfo = data;
     })
   }
@@ -57,4 +58,7 @@ export class CustomerPageComponent implements OnInit {
     control.removeAt(i);
   }
 
+  ngOnDestroy(){
+    this.customerDataSubscriber.unsubscribe();
+  }
 }
